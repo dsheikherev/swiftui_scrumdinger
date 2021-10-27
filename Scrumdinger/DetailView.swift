@@ -59,21 +59,32 @@ struct DetailView: View {
             }
         }
         .listStyle(InsetGroupedListStyle())
-        .navigationBarItems(trailing: Button("Edit") {
-            isPresented = true
-            data = scrum.data
-        })
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Edit") {
+                    isPresented = true
+                    data = scrum.data
+                }
+            }
+        }
         .navigationTitle(scrum.title)
         .fullScreenCover(isPresented: $isPresented) {
             NavigationView {
                 EditView(scrumData: $data)
                     .navigationTitle(scrum.title)
-                    .navigationBarItems(leading: Button("Cancel") {
-                        isPresented = false
-                    }, trailing: Button("Done") {
-                        isPresented = false
-                        scrum.update(from: data)
-                    })
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Cancel") {
+                                isPresented = false
+                            }
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Done") {
+                                isPresented = false
+                                scrum.update(from: data)
+                            }
+                        }
+                    }
             }
         }
     }
