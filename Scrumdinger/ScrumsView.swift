@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Bugsee
 
 struct ScrumsView: View {
     
@@ -32,6 +33,13 @@ struct ScrumsView: View {
                     isPresented = true
                 }, label: {
                     Image(systemName: "plus")
+                })
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    Bugsee.showReportController()
+                }, label: {
+                    Image(systemName: "doc.plaintext")
                 })
             }
         }
